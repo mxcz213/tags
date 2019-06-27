@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ppTag demo</title>
+	<link rel="stylesheet" type="text/css" href="css/ppTag.css">
+</head>
+<body>
+	<h1>使用示例 demo</h1>
+	<div id="ppTagId"></div>
+	<script src="js/utils/utils.js"></script>
+	<script src="js/utils/utils.dom.js"></script>
+	<script src="js/utils/service.js"></script>
+	<script type="text/javascript" src="js/components/ppTag.js"></script>
+	<script type="text/javascript">
+		(function(){
+			var ppTag = myTags;
+			var tagData = ['分手大师','分手大师好看么','分手大师好看的不得了','你猜分手大师好不好看'];
+			var ppTag = new ppTag({
+				containerDOM: document.getElementById('ppTagId'),
+				inputName:'tagName',
+				onValidate:function(value){
+					if(value == ''){
+						console.log('请输入标签');
+						return false;
+					}
+					if(value.length > 10){
+						console.log('单个标签不超过10个汉字');
+						this.tagInput.value = value.substring(0,11);
+						return false;
+					}
+					if(this.tagData.length >= 6){
+						console.log('最多录入6个标签');
+						return false;
+					}
+					return true;
+				}
+			});
+			ppTag.setValue(tagData);
+		})();
+	</script>
+</body>
+</html>
